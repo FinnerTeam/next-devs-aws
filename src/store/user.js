@@ -15,14 +15,16 @@ const initialState = {
 
 export const getUserProfile = (token) => {
   return async (dispatch) => {
-    console.log(token);
     const headers = {
       "Content-Type": "application/json",
       Auth: "JWT  " + token,
     };
-    const response = await axios.get("http://localhost:5000/user/profile", {
-      headers,
-    });
+    const response = await axios.get(
+      "https://next-devs12.herokuapp.com/user/profile",
+      {
+        headers,
+      }
+    );
     dispatch(userActions.userData(response.data));
   };
 };

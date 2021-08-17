@@ -3,6 +3,7 @@ import { useHttp } from "hooks/http";
 import { toastActions } from "store/toast";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "store/user";
+import { config } from "url";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -108,7 +109,7 @@ export default function UserProfile() {
       (async function() {
         try {
           const response = await sendRequest(
-            "http://localhost:5000/user/profile",
+            "https://next-devs12.herokuapp.com/user/profile",
             "PATCH",
             JSON.stringify(inputFields),
             {

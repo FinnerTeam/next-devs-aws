@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { config } from "url";
 
 const initialState = {
   isLoggedIn: false,
@@ -13,10 +14,13 @@ export const login = (email, password) => {
   return async (dispatch) => {
     dispatch(authActions.storeData({ isLoading: true, error: null }));
     try {
-      const response = await axios.post("http://localhost:5000/auth/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://next-devs12.herokuapp.com/auth/login",
+        {
+          email,
+          password,
+        }
+      );
       const tokenExpTime = new Date(new Date().getTime() + 1000 * 60 * 60);
       localStorage.setItem(
         "userData",
