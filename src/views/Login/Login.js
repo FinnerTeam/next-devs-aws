@@ -44,10 +44,9 @@ export default function Login() {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth);
+  const auth = useSelector((state) => state.auth);
   const emailRef = useRef();
   const passwordRef = useRef();
-
   const loginHandler = async (event) => {
     event.preventDefault();
     const enteredEmail = emailRef.current.value;
@@ -56,11 +55,11 @@ export default function Login() {
   };
 
   useEffect(() => {
-    if (user.isLoggedIn === true) {
-      dispatch(getUserProfile(user.token));
+    if (auth.isLoggedIn === true) {
+      dispatch(getUserProfile(auth.token));
       history.replace("/admin");
     }
-  }, [user.isLoggedIn, dispatch, user.token, history]);
+  }, [auth.isLoggedIn, dispatch, auth.token, history]);
 
   return (
     <div className={classes.wrapper}>
@@ -101,11 +100,11 @@ export default function Login() {
                     }}
                   />
                 </GridItem>{" "}
-                {!!user.error && (
-                  <div className={classes.error}>{user.error}</div>
+                {!!auth.error && (
+                  <div className={classes.error}>{auth.error}</div>
                 )}
                 <Button type="submit" color="primary">
-                  {user.isLoading ? "Loading.." : "Login"}
+                  {auth.isLoading ? "Loading.." : "Login"}
                 </Button>
               </form>
             </CardBody>

@@ -18,7 +18,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import Errors from "components/Messages/Errors";
 // variables
 import { inputFields } from "variables/signUp";
-import { config } from "url";
+// import { config } from "url";
 
 const styles = {
   wrapper: {

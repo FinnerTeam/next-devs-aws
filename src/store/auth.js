@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { config } from "url";
+// import { config } from "url";
 
 const initialState = {
   isLoggedIn: false,
@@ -68,7 +68,7 @@ const authSlice = createSlice({
         isLoggedIn: data.isLoggedIn || state.isLoggedIn,
         token: data.token || state.token,
         remainingTime: data.remainingTime || state.remainingTime,
-        isLoading: data.isLoading || state.isLoading,
+        isLoading: data.isLoading || false,
         error: data.error || state.error,
       };
     },

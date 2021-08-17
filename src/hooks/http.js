@@ -23,7 +23,10 @@ export const useHttp = () => {
         );
         if (responseData?.validErrors?.length > 0) {
           setIsLoading(false);
-          setErrors((previousState) => [...previousState, responseData.errors]);
+          setErrors((previousState) => [
+            ...previousState,
+            responseData?.validErrors,
+          ]);
           throw new Error(response.message);
         }
         if (!response.ok) {

@@ -18,7 +18,6 @@ export default function Toast() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const snackbarOpen = useSelector((state) => state.toast.snackbarOpen);
-  console.log(snackbarOpen);
   const snackbarType = useSelector((state) => state.toast.snackbarType);
   const snackbarMessage = useSelector((state) => state.toast.snackbarMessage);
 

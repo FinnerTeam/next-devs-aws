@@ -1,9 +1,9 @@
-import React, { useRef, useState, useEffect, useReducer } from "react";
+import React, { useRef, useEffect, useReducer } from "react";
 import { useHttp } from "hooks/http";
 import { toastActions } from "store/toast";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "store/user";
-import { config } from "url";
+// import { config } from "url";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -128,7 +128,7 @@ export default function UserProfile() {
         } catch (err) {}
       })();
     }
-  }, [formState, dispatch, sendRequest]);
+  }, [formState, dispatch, sendRequest, token]);
 
   return (
     <div>
