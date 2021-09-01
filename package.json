@@ -3,13 +3,14 @@
   "version": "1.8.0",
   "description": "Material Dashboard React. Coded by Creative Tim",
   "private": false,
-  "main": "dist/index.js",
+  "main": "main/index.js",
   "dependencies": {
     "@material-ui/core": "^4.12.2",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@reduxjs/toolkit": "^1.6.1",
     "axios": "^0.21.1",
+    "bower": "^1.8.12",
     "chartist": "0.10.1",
     "classnames": "2.2.6",
     "history": "4.9.0",
@@ -50,7 +51,6 @@
   "bugs": {
     "url": "https://github.com/creativetimofficial/material-dashboard-react/issues"
   },
-  "homepage": "https://creativetimofficial.github.io/material-dashboard-react/#/dashboard",
   "optionalDependencies": {
     "@types/googlemaps": "3.37.3",
     "@types/markerclustererplus": "2.1.33",
