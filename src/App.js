@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import Admin from "layouts/Admin.js";
 import Login from "views/Login/Login.js";
@@ -6,7 +6,8 @@ import SignUp from "views/SignUp/SignUp.js";
 import RTL from "layouts/RTL.js";
 import Toast from "components/Messages/toast";
 import { createBrowserHistory } from "history";
-import { authActions } from "store/auth";
+import { authActions } from "store/Auth/actions";
+import { logOut } from "store/Auth/helpers";
 import { useDispatch, useSelector } from "react-redux";
 import PrivateRoute from "PrivateRoute";
 let logoutTimer;
@@ -19,12 +20,14 @@ export default function App() {
     const storedData = JSON.parse(localStorage.getItem("userData"));
     if (
       storedData &&
-      storedData.token &&
+      storedData.accessToken &&
+      storedData.refreshToken &&
       new Date(storedData.tokenExpTime) > new Date()
     ) {
       dispatch(
         authActions.storeData({
-          token: storedData.token,
+          accessToken: storedData.accessToken,
+          refreshToken: storedData.refreshToken,
           remainingTime: storedData.tokenExpTime,
           isLoggedIn: true,
         })
@@ -32,19 +35,15 @@ export default function App() {
     }
   }, [dispatch]);
 
-  const logOut = useCallback(() => {
-    dispatch(authActions.logOut());
-  }, [dispatch]);
-
   useEffect(() => {
-    if (user && user.token && user.tokenExpTime) {
+    if (user && user.accessToken && user.refreshToken && user.tokenExpTime) {
       const remainingTime =
         user.tokenExpTime.toLocaleTimeString().getTime() - new Date().getTime();
-      logoutTimer = setTimeout(logOut, remainingTime);
+      logoutTimer = setTimeout(logOut(), remainingTime);
     } else {
       clearTimeout(logoutTimer);
     }
-  }, [dispatch, hist, user, logOut]);
+  }, [dispatch, hist, user]);
 
   return (
     <>

@@ -18,7 +18,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import Errors from "components/Messages/Errors";
 // variables
 import { inputFields } from "variables/signUp";
-// import { config } from "url";
+import { SERVER_URL } from "../../url";
 
 const styles = {
   wrapper: {
@@ -129,7 +129,7 @@ export default function Login() {
       (async function() {
         try {
           await sendRequest(
-            "https://next-devs12.herokuapp.com/auth/signUp",
+            `${SERVER_URL}/auth/signUp`,
             "POST",
             JSON.stringify(inputFields),
             { "Content-Type": "application/json" }

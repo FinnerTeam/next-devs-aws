@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../store/auth";
+import { login } from "../../store/Auth/helpers";
 import { getUserProfile } from "../../store/user";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -56,10 +56,10 @@ export default function Login() {
 
   useEffect(() => {
     if (auth.isLoggedIn === true) {
-      dispatch(getUserProfile(auth.token));
+      dispatch(getUserProfile(auth.accessToken));
       history.replace("/admin");
     }
-  }, [auth.isLoggedIn, dispatch, auth.token, history]);
+  }, [auth.isLoggedIn, dispatch, auth.accessToken, history]);
 
   return (
     <div className={classes.wrapper}>

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import { SERVER_URL } from "../url";
 const initialState = {
   userName: null,
   email: null,
@@ -13,18 +13,15 @@ const initialState = {
   aboutMe: null,
 };
 
-export const getUserProfile = (token) => {
+export const getUserProfile = (accessToken) => {
   return async (dispatch) => {
     const headers = {
       "Content-Type": "application/json",
-      Auth: "JWT  " + token,
+      Auth: "JWT  " + accessToken,
     };
-    const response = await axios.get(
-      "https://next-devs12.herokuapp.com/user/profile",
-      {
-        headers,
-      }
-    );
+    const response = await axios.get(`${SERVER_URL}/user/profile`, {
+      headers,
+    });
     dispatch(userActions.userData(response.data));
   };
 };

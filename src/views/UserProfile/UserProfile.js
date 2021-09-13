@@ -3,7 +3,7 @@ import { useHttp } from "hooks/http";
 import { toastActions } from "store/toast";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "store/user";
-// import { config } from "url";
+import { SERVER_URL } from "../../url";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -84,7 +84,7 @@ export default function UserProfile() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const token = useSelector((state) => state.auth.token);
+  const accessToken = useSelector((state) => state.auth.accessToken);
   const { isLoading, errors: serverErrors, sendRequest } = useHttp();
   const [formState, dispatchForm] = useReducer(formReducer, initialState);
   const itemEls = useRef([]);
@@ -109,12 +109,12 @@ export default function UserProfile() {
       (async function() {
         try {
           const response = await sendRequest(
-            "https://next-devs12.herokuapp.com/user/profile",
+            `${SERVER_URL}/user/profile`,
             "PATCH",
             JSON.stringify(inputFields),
             {
               "Content-Type": "application/json",
-              Auth: "Bearer  " + token,
+              Auth: "Bearer  " + accessToken,
             }
           );
           dispatch(userActions.userData(response));
@@ -128,7 +128,7 @@ export default function UserProfile() {
         } catch (err) {}
       })();
     }
-  }, [formState, dispatch, sendRequest, token]);
+  }, [formState, dispatch, sendRequest, accessToken]);
 
   return (
     <div>
